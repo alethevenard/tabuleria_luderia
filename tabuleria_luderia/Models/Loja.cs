@@ -10,6 +10,7 @@ namespace tabuleria_luderia.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Nome da Loja")]
         public string  NomeDaLoja { get; set; }
 
         [Required(ErrorMessage = "Campo Obrigatório")]
