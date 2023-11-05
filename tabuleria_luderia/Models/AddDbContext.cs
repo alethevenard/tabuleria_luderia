@@ -10,5 +10,7 @@ namespace tabuleria_luderia.Models
 
         public DbSet<Loja> Lojas { get; set; }
 
+        public DbSet<Jogo> Jogos { get; set; }
+
     }
 }

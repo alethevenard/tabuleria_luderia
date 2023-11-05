@@ -1,0 +1,71 @@
+﻿@model tabuleria_luderia.Models.Jogo
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Criar Novo Jogo</h1>
+
+<h4>Jogo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NomeDoJogo" class="control-label"></label>
+                <input asp-for="NomeDoJogo" class="form-control" />
+                <span asp-validation-for="NomeDoJogo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinJogadores" class="control-label"></label>
+                <input asp-for="MinJogadores" class="form-control" />
+                <span asp-validation-for="MinJogadores" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxJogadores" class="control-label"></label>
+                <input asp-for="MaxJogadores" class="form-control" />
+                <span asp-validation-for="MaxJogadores" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdadeMin" class="control-label"></label>
+                <input asp-for="IdadeMin" class="form-control" />
+                <span asp-validation-for="IdadeMin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mecanicas" class="control-label"></label>
+                <input asp-for="Mecanicas" class="form-control" />
+                <span asp-validation-for="Mecanicas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Temas" class="control-label"></label>
+                <input asp-for="Temas" class="form-control" />
+                <span asp-validation-for="Temas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Valor" class="control-label"></label>
+                <input asp-for="Valor" class="form-control" />
+                <span asp-validation-for="Valor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LojaId" class="control-label"></label>
+                <select asp-for="LojaId" class ="form-control" asp-items="ViewBag.LojaId"></select>
+            </div>
+            <div class="form-group">
+                <a asp-action="Index" class="btn btn-info">Voltar</a>
+                <input type="submit" value="Salvar" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

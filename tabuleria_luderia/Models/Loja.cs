@@ -33,6 +33,8 @@ namespace tabuleria_luderia.Models
         [Required(ErrorMessage = "Campo Obrigatório")]
         public string Cep { get; set; }
 
+        public ICollection<Jogo> Jogos { get; set; }
+
 
     }
 }
