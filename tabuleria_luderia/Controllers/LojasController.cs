@@ -110,6 +110,27 @@ namespace tabuleria_luderia.Controllers
             return View(dados);
         }
 
+        public async Task<IActionResult> Relatorio(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var loja = await _context.Lojas.FindAsync(id);
+
+            if (loja == null)
+                return NotFound();
+
+            var jogos = await _context.Jogos
+                .Where(c => c.LojaId == id)
+                .OrderByDescending(c => c.NomeDoJogo)
+                .ToListAsync();
+
+            ViewBag.Loja = loja;
+
+
+            return View(jogos);
+        }
+
     }
 
 }

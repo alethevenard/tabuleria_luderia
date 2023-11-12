@@ -1,0 +1,73 @@
+﻿@model IEnumerable<tabuleria_luderia.Models.Jogo>
+
+@{
+    ViewData["Title"] = "Relatorio";
+}
+
+<h1>Lista de jogos da @ViewBag.Loja.NomeDaLoja</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeDoJogo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinJogadores)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxJogadores)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdadeMin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mecanicas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Temas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeDoJogo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinJogadores)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxJogadores)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdadeMin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mecanicas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Temas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            
+           
+        </tr>
+}
+    </tbody>
+</table>

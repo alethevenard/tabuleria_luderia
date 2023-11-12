@@ -9,90 +9,85 @@ using tabuleria_luderia.Models;
 
 namespace tabuleria_luderia.Controllers
 {
-    public class JogosController : Controller
+    public class UsuariosController : Controller
     {
         private readonly AppDbContext _context;
 
-        public JogosController(AppDbContext context)
+        public UsuariosController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: Jogos
+        // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Jogos.Include(j => j.Loja);
-            return View(await appDbContext.ToListAsync());
+              return View(await _context.Usuarios.ToListAsync());
         }
 
-        // GET: Jogos/Details/5
+        // GET: Usuarios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Jogos == null)
+            if (id == null || _context.Usuarios == null)
             {
                 return NotFound();
             }
 
-            var jogo = await _context.Jogos
-                .Include(j => j.Loja)
+            var usuario = await _context.Usuarios
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (jogo == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return View(jogo);
+            return View(usuario);
         }
 
-        // GET: Jogos/Create
+        // GET: Usuarios/Create
         public IActionResult Create()
         {
-            ViewData["LojaId"] = new SelectList(_context.Lojas, "Id", "NomeDaLoja");
             return View();
         }
 
-        // POST: Jogos/Create
+        // POST: Usuarios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NomeDoJogo,Descricao,MinJogadores,MaxJogadores,IdadeMin,Mecanicas,Temas,Valor,LojaId")] Jogo jogo)
+        public async Task<IActionResult> Create([Bind("Id,NomedoUsuario,Senha,Perfil")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(jogo);
+                _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LojaId"] = new SelectList(_context.Lojas, "Id", "NomeDaLoja", jogo.LojaId);
-            return View(jogo);
+            return View(usuario);
         }
 
-        // GET: Jogos/Edit/5
+        // GET: Usuarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Jogos == null)
+            if (id == null || _context.Usuarios == null)
             {
                 return NotFound();
             }
 
-            var jogo = await _context.Jogos.FindAsync(id);
-            if (jogo == null)
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario == null)
             {
                 return NotFound();
             }
-            ViewData["LojaId"] = new SelectList(_context.Lojas, "Id", "NomeDaLoja", jogo.LojaId);
-            return View(jogo);
+            return View(usuario);
         }
 
-        // POST: Jogos/Edit/5
+        // POST: Usuarios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeDoJogo,Descricao,MinJogadores,MaxJogadores,IdadeMin,Mecanicas,Temas,Valor,LojaId")] Jogo jogo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NomedoUsuario,Senha,Perfil")] Usuario usuario)
         {
-            if (id != jogo.Id)
+            if (id != usuario.Id)
             {
                 return NotFound();
             }
@@ -101,12 +96,12 @@ namespace tabuleria_luderia.Controllers
             {
                 try
                 {
-                    _context.Update(jogo);
+                    _context.Update(usuario);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!JogoExists(jogo.Id))
+                    if (!UsuarioExists(usuario.Id))
                     {
                         return NotFound();
                     }
@@ -117,51 +112,49 @@ namespace tabuleria_luderia.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LojaId"] = new SelectList(_context.Lojas, "Id", "NomeDaLoja", jogo.LojaId);
-            return View(jogo);
+            return View(usuario);
         }
 
-        // GET: Jogos/Delete/5
+        // GET: Usuarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Jogos == null)
+            if (id == null || _context.Usuarios == null)
             {
                 return NotFound();
             }
 
-            var jogo = await _context.Jogos
-                .Include(j => j.Loja)
+            var usuario = await _context.Usuarios
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (jogo == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return View(jogo);
+            return View(usuario);
         }
 
-        // POST: Jogos/Delete/5
+        // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Jogos == null)
+            if (_context.Usuarios == null)
             {
-                return Problem("Entity set 'AppDbContext.Jogos'  is null.");
+                return Problem("Entity set 'AppDbContext.Usuarios'  is null.");
             }
-            var jogo = await _context.Jogos.FindAsync(id);
-            if (jogo != null)
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario != null)
             {
-                _context.Jogos.Remove(jogo);
+                _context.Usuarios.Remove(usuario);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool JogoExists(int id)
+        private bool UsuarioExists(int id)
         {
-          return _context.Jogos.Any(e => e.Id == id);
+          return _context.Usuarios.Any(e => e.Id == id);
         }
     }
 }

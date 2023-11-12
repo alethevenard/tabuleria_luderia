@@ -12,5 +12,7 @@ namespace tabuleria_luderia.Models
 
         public DbSet<Jogo> Jogos { get; set; }
 
+        public DbSet<Usuario> Usuarios { get; set; }
+
     }
 }
